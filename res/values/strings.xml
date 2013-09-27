@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mini Monster</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_info">Info</string>
+    <string name="switcher_title">Switcher %d</string>
+    <string name="switcher_port">Port: %d</string>
+    <string name="value_on">ON</string>
+    <string name="value_off">OFF</string>
+    <string name="switch_failed">Switching failed</string>
+    <string name="settings_name">Settings</string>
+    <string name="monster_url">URL</string>
+    <string name="monster_password">Password</string>
+    <string name="setup_monster_url">Setup monster URL and port</string>
+    <string name="setup_monster_password">Setup monster password</string>
+    <string name="temperature_failed">Error while obtaining temperature</string>
+    <string name="temperature_title">Temperature</string>
+    <string name="temerature">Temperature: %s</string>
+    <string name="close">Close</string>
+    <string name="list_failed">Switchers loading failed</string>
+    <string name="loading">Loading</string>
+    <string name="please_wait">Please wait…</string>
+    <string name="content_edit">Rename</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="edit_switcher_title">Edit title</string>
+    <string name="rating_important">Shortcut</string>
+    <string name="switch_state">Switch state</string>
+    <string name="turn_on">Turn on</string>
+    <string name="turn_off">Turn off</string>
+    <string name="turned_on">turned on</string>
+    <string name="turned_off">turned off</string>
+    <string name="switcher_in_state">Now "%1$s" is %2$s. Switch now?</string>
+    <string name="no_more_switcher">Switch with that name no longer exists!</string>
+    <string name="title_already_exist">This name is already assigned to another switch!</string>
+</resources>

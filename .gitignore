@@ -1,0 +1,18 @@
+*.class
+
+*.zip
+
+
+# IDE folders #
+
+gen/
+
+bin/
+
+out/
+
+local.properties
+
+.idea/workspace.xml
+
+.idea/dictionaries/

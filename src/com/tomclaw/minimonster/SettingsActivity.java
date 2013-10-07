@@ -1,4 +1,4 @@
-package com.example.minimonster;
+package com.tomclaw.minimonster;
 
 import android.os.Bundle;
 import android.preference.PreferenceActivity;

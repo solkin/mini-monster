@@ -1,4 +1,4 @@
-package com.example.minimonster;
+package com.tomclaw.minimonster;
 
 import java.util.ArrayList;
 

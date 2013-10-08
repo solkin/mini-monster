@@ -231,13 +231,6 @@ public class MainActivity extends Activity {
                             dialog.dismiss();
                         }
 
-                        SwitchersList switchersList = new SwitchersList();
-                        for(int c=0;c<5;c++){
-                            switchersList.add(new Switcher(c, false));
-                        }
-                        mSwitchersAdapter.setSwitchersList(switchersList);
-                        mSwitchersAdapter.notifyDataSetChanged();
-
                         Toast.makeText(MainActivity.this, R.string.list_failed, Toast.LENGTH_SHORT).show();
                     }
                 });

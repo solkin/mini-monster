@@ -17,6 +17,8 @@ public class Settings {
 
     public static String LOG_TAG = "MiniMonster";
 
+    public static String PROMO_URL = "http://mini-monster.ru/simple/simple.html?fromapp=true";
+
     private static final String SWITCHER_PREFIX = "switcher_";
     public static final int POSITION_INVALID = -1;
 
@@ -43,6 +45,10 @@ public class Settings {
 
     public String getMonsterPassword() {
         return mPreferences.getString("monster_password", mContext.getString(R.string.default_password));
+    }
+
+    public boolean isSettingsInitialized() {
+        return !(TextUtils.isEmpty(getMonsterUrl()) || TextUtils.isEmpty(getMonsterPassword()));
     }
 
     public String getSwitcherTitle(int position) {

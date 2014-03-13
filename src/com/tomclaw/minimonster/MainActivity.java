@@ -28,6 +28,14 @@ public class MainActivity extends Activity {
 
         Settings.getInstance().initSettings(this);
 
+        if(!Settings.getInstance().isSettingsInitialized()) {
+            overridePendingTransition(0, 0);
+            startActivity(new Intent(this, SettingsActivity.class)
+                    .putExtra(SettingsActivity.INIT_SETTINGS, true));
+            finish();
+            return;
+        }
+
         mSwitchersAdapter = new SwitchersAdapter(this);
 
         final ListView switchersListView = (ListView) findViewById(R.id.switchers_list_view);

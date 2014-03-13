@@ -1,8 +1,12 @@
 package com.tomclaw.minimonster;
 
+import android.app.ActionBar;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
+import android.view.Menu;
 import android.view.MenuItem;
 
 /**
@@ -13,23 +17,56 @@ import android.view.MenuItem;
  */
 public class SettingsActivity extends PreferenceActivity {
 
+    public static final String INIT_SETTINGS = "init_settings";
+    private boolean isInitSettings;
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        isInitSettings = getIntent().getBooleanExtra(INIT_SETTINGS, false);
+
+        ActionBar bar = getActionBar();
+        bar.setDisplayShowTitleEnabled(true);
+        bar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+        bar.setDisplayHomeAsUpEnabled(true);
 
         getFragmentManager().beginTransaction().replace(android.R.id.content,
                 new SettingsFragment()).commit();
     }
 
     @Override
+    public void onBackPressed() {
+        if(isInitSettings && Settings.getInstance().isSettingsInitialized()) {
+            startActivity(new Intent(this, MainActivity.class));
+        }
+        finish();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.settings_menu, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
+            case android.R.id.home: {
+                onBackPressed();
+                break;
+            }
+            case R.id.action_help: {
+                openPromoPage();
+                break;
+            }
         }
-        return(true);
+        return true;
+    }
+
+    private void openPromoPage() {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Settings.PROMO_URL));
+        startActivity(browserIntent);
     }
 
     public static class SettingsFragment extends PreferenceFragment {

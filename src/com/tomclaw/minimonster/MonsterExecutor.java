@@ -115,13 +115,14 @@ public class MonsterExecutor {
             public void run() {
                 InputStream in = null;
                 try {
-                    URL url = new URL(getMonsterUrl() + "?main=");
+                    URL url = new URL(getMonsterUrl() + "?temp="); 
                     Log.d(Settings.LOG_TAG, url.getQuery());
                     URLConnection urlConnection = url.openConnection();
                     in = new BufferedInputStream(urlConnection.getInputStream());
                     String content = new String(readFully(in), "UTF-8");
-                    int temperatureIndex = content.indexOf("t = ") + 4;
-                    String temperature = content.substring(temperatureIndex);
+                    int temperatureIndex = content.indexOf(",", 130) + 1;
+                    int closeIndex = content.indexOf(",", temperatureIndex + 1);
+                    String temperature = content.substring(temperatureIndex, closeIndex);
                     callback.onComplete(temperature);
                 } catch (Throwable ignored) {
                     callback.onError();

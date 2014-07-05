@@ -35,4 +35,6 @@
     <string name="switcher_in_state">Сейчас %1$s %2$s. Переключить?</string>
     <string name="no_more_switcher">Переключателя с таким названием больше не существует!</string>
     <string name="title_already_exist">Такое название уже присвоено другому переключателю!</string>
+    <string name="switchers">Переключатели</string>
+    <string name="monsters">Модули</string>
 </resources>

@@ -1,15 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent">
+<com.tomclaw.minimonster.views.MonstersDrawerLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <ListView
+    <LinearLayout
+            android:id="@+id/content_frame"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/switchers_list_view"
-            android:choiceMode="singleChoice"
-            android:longClickable="true"/>
-
-</LinearLayout>
+            android:layout_height="match_parent">
+        <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/switchers_list_view"
+                android:choiceMode="singleChoice"
+                android:longClickable="true"/>
+    </LinearLayout>
+    <LinearLayout android:id="@+id/left_drawer"
+                  android:layout_width="300dp"
+                  android:layout_height="match_parent"
+                  android:layout_gravity="start"
+                  android:orientation="vertical"
+                  android:background="@color/profile_panel_background">
+        <ListView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:id="@+id/accounts_list_view"
+                android:layout_gravity="center"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:clickable="true"
+                android:longClickable="true"
+                android:choiceMode="multipleChoiceModal"
+                android:layout_weight="1"/>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/separator_navbar"/>
+            <Button android:id="@+id/settings_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_name"
+                    android:drawableLeft="@drawable/ic_action_settings"
+                    android:drawablePadding="4dp"
+                    android:paddingLeft="4dp"
+                    style="@style/Button.NavBar"/>
+            </LinearLayout>
+        </LinearLayout>
+</com.tomclaw.minimonster.views.MonstersDrawerLayout>
 

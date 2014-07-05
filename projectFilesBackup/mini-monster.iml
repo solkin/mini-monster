@@ -3,10 +3,7 @@
   <component name="FacetManager">
     <facet type="android" name="Android">
       <configuration>
-        <proGuardCfgFiles>
-          <file>file://%MODULE_SDK_HOME%/tools/proguard/proguard-android.txt</file>
-          <file>file://$MODULE_DIR$/proguard-project.txt</file>
-        </proGuardCfgFiles>
+        <option name="RUN_PROGUARD" value="true" />
       </configuration>
     </facet>
   </component>
@@ -18,15 +15,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/libs/android-support-v4.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
   </component>
 </module>
 

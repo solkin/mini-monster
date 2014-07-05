@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="profile_panel_background">#EE232323</color>
+    <color name="separator_navbar">#44000000</color>
+    <color name="button_navbar_text">#ffdddddd</color>
+    <color name="button_navbar_normal">#11000000</color>
+    <color name="button_navbar_pressed">#55000000</color>
+
+    <style name="Button.NavBar" parent="android:Widget.Button">
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/button_navbar_text</item>
+        <item name="android:background">@drawable/button_navbar</item>
+        <item name="android:gravity">left|center_vertical</item>
+    </style>
+</resources>

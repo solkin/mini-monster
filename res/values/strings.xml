@@ -40,4 +40,8 @@
     <string name="add_monster">Add module</string>
     <string name="complete">Complete</string>
     <string name="monster_name">Module name (optional)</string>
+    <string name="unable_to_connect_to_monster">Unable to connect to monster</string>
+    <string name="module_name">Module name</string>
+    <string name="module_url">Module URL address</string>
+    <string name="module_password">Module password</string>
 </resources>

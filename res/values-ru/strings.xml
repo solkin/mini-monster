@@ -40,4 +40,8 @@
     <string name="add_monster">Добавление модуля</string>
     <string name="complete">Готово</string>
     <string name="monster_name">Имя модуля (опционально)</string>
+    <string name="unable_to_connect_to_monster">Не удалось подключиться к модулю</string>
+    <string name="module_name">Название модуля</string>
+    <string name="module_url">Адрес URL модуля</string>
+    <string name="module_password">Пароль к модулю</string>
 </resources>

@@ -5,8 +5,10 @@ import com.podio.sdk.Podio;
 import com.podio.sdk.Request;
 import com.podio.sdk.Store;
 import com.tomclaw.minimonster.dto.Model;
+import com.tomclaw.minimonster.dto.Monster;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -56,6 +58,13 @@ public class MonstersController {
                         setModel(model);
                         return false;
                     }
+                })
+                .withErrorListener(new Request.ErrorListener() {
+                    @Override
+                    public boolean onErrorOccured(Throwable throwable) {
+                        setModel(null);
+                        return false;
+                    }
                 });
     }
 
@@ -75,6 +84,17 @@ public class MonstersController {
         for(GetModelCallback callback : callbacks) {
             callback.onModel(model);
         }
+    }
+
+    public void insertMonster(Monster monster, boolean active) {
+        model.getMonsters().add(monster);
+        if(active) {
+            model.setActive(model.getMonsters().indexOf(monster));
+        }
+    }
+
+    public void update() {
+        localStore.set("model", model);
     }
 
     public interface GetModelCallback {

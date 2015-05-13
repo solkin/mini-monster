@@ -8,7 +8,6 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.ActionMode;
 import android.view.Menu;
@@ -16,15 +15,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 import com.tomclaw.minimonster.dto.Model;
-import com.tomclaw.minimonster.legacy.SwitchersList;
+import com.tomclaw.minimonster.views.MaterialProgressBar;
 import com.tomclaw.minimonster.views.MonstersDrawerLayout;
 
 public class MainActivity extends AppCompatActivity {
 
-    private SwitchersAdapter mSwitchersAdapter;
+    private MonstersAdapter monstersAdapter;
+    private PortsAdapter portsAdapter;
     private ActionMode mActionMode;
     private MonstersDrawerLayout drawerLayout;
     private Toolbar toolbar;
+    private MaterialProgressBar progressBar;
 
     /**
      * Called when the activity is first created.
@@ -47,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.setTitle(getString(R.string.app_name));
         drawerLayout.setDrawerTitle(getString(R.string.app_name));
 
+        progressBar = (MaterialProgressBar) findViewById(R.id.toolbar_progress_bar);
+
         Settings.getInstance().initSettings(this);
 
         /*if(!Settings.getInstance().isSettingsInitialized()) {
@@ -57,14 +60,19 @@ public class MainActivity extends AppCompatActivity {
             return;
         }*/
 
-        mSwitchersAdapter = new SwitchersAdapter(this);
+        monstersAdapter = new MonstersAdapter(this);
 
-        final ListView switchersListView = (ListView) findViewById(R.id.switchers_list_view);
-        switchersListView.setAdapter(mSwitchersAdapter);
-        switchersListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        final ListView monstersListView = (ListView) findViewById(R.id.monsters_list_view);
+        monstersListView.setAdapter(monstersAdapter);
+
+        portsAdapter = new PortsAdapter(this);
+
+        final ListView portsListView = (ListView) findViewById(R.id.ports_list_view);
+        portsListView.setAdapter(portsAdapter);
+        /*portsListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, final View view, final int position, long id) {
-                if(mActionMode != null) {
+                if (mActionMode != null) {
                     return false;
                 }
                 view.setActivated(true);
@@ -96,9 +104,9 @@ public class MainActivity extends AppCompatActivity {
                                     public void onClick(DialogInterface dialog, int whichButton) {
                                         String title = editText.getText().toString();
                                         // Checking for such titles.
-                                        if(!mSwitchersAdapter.checkTitleExist(title)) {
+                                        if (!portsAdapter.checkTitleExist(title)) {
                                             Settings.getInstance().setSwitcherTitle(position, title);
-                                            mSwitchersAdapter.notifyDataSetChanged();
+                                            portsAdapter.notifyDataSetChanged();
                                         } else {
                                             Toast.makeText(MainActivity.this, R.string.title_already_exist,
                                                     Toast.LENGTH_SHORT).show();
@@ -130,25 +138,43 @@ public class MainActivity extends AppCompatActivity {
                 });
                 return true;
             }
-        });
+        });*/
 
         // refreshSwitchersList();
         loadData();
+    }
+
+    private void showProgress() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    private void hideProgress() {
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     private void loadData() {
         MonstersController.getInstance().getModel(new MonstersController.GetModelCallback() {
             @Override
             public void onModel(final Model model) {
+                if (model.isEmpty()) {
+                    Intent intent = new Intent(MainActivity.this, AddMonsterActivity.class);
+                    startActivity(intent);
+                } else {
+                    onModelChanged();
+                }
+            }
+        });
+    }
+
+    private void onModelChanged() {
+        MonstersController.getInstance().getModel(new MonstersController.GetModelCallback() {
+            @Override
+            public void onModel(final Model model) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if(model.isEmpty()) {
-                            Intent intent = new Intent(MainActivity.this, AddMonsterActivity.class);
-                            startActivity(intent);
-                        }
-                        // mSwitchersAdapter.setSwitchersList(switchersList);
-                        // mSwitchersAdapter.notifyDataSetChanged();
+                        monstersAdapter.setMonsters(model.getMonsters());
+                        portsAdapter.setPorts(model.getActiveMonster().getPortsList().getPorts());
                     }
                 });
             }
@@ -200,7 +226,7 @@ public class MainActivity extends AppCompatActivity {
                         });
                     }
                 };
-                MonsterExecutor.getInstance().getTemperature(temperatureCallback);
+                // MonsterExecutor.getInstance().getTemperature(temperatureCallback);
                 return true;
             }
             case R.id.action_settings: {
@@ -238,18 +264,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onToggleClicked(View view) {
-        SwitchCompat switcherToggle = (SwitchCompat) view;
+        /*SwitchCompat switcherToggle = (SwitchCompat) view;
         Integer port = (Integer) view.getTag(R.string.switcher_port);
         final ProgressDialog dialog = ProgressDialog.show(this,
                 getString(R.string.loading), getString(R.string.please_wait), true);
-        MonsterExecutor.SwitchCallback callback = new MonsterExecutor.SwitchCallback() {
+        MonsterExecutor.PortCallback callback = new MonsterExecutor.PortCallback() {
             @Override
             public void onComplete(final SwitchersList switchersList) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        mSwitchersAdapter.setSwitchersList(switchersList);
-                        mSwitchersAdapter.notifyDataSetChanged();
+                        portsAdapter.setSwitchersList(switchersList);
+                        portsAdapter.notifyDataSetChanged();
                         if(dialog.isShowing()) {
                             dialog.dismiss();
                         }
@@ -266,28 +292,28 @@ public class MainActivity extends AppCompatActivity {
                             dialog.dismiss();
                         }
                         // Returning changes back.
-                        mSwitchersAdapter.notifyDataSetChanged();
+                        portsAdapter.notifyDataSetChanged();
                         Toast.makeText(MainActivity.this, R.string.switch_failed, Toast.LENGTH_SHORT).show();
                     }
                 });
             }
         };
-        MonsterExecutor.getInstance().switchPort(port, switcherToggle.isChecked(), callback);
+        MonsterExecutor.getInstance().switchPort(port, switcherToggle.isChecked(), callback);*/
     }
 
     private void refreshSwitchersList() {
-        final ProgressDialog dialog = ProgressDialog.show(this,
+        /*final ProgressDialog dialog = ProgressDialog.show(this,
                 getString(R.string.loading), getString(R.string.please_wait), true);
         dialog.setCancelable(true);
-        MonsterExecutor.ListCallback listCallback = new MonsterExecutor.ListCallback() {
+        MonsterExecutor.PortsListCallback portsListCallback = new MonsterExecutor.PortsListCallback() {
             @Override
             public void onComplete(final SwitchersList switchersList) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         // localStore.set("switchers", switchersList);
-                        mSwitchersAdapter.setSwitchersList(switchersList);
-                        mSwitchersAdapter.notifyDataSetChanged();
+                        portsAdapter.setSwitchersList(switchersList);
+                        portsAdapter.notifyDataSetChanged();
                         if(dialog.isShowing()) {
                             dialog.dismiss();
                         }
@@ -309,7 +335,7 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         };
-        MonsterExecutor.getInstance().fetchSwitchers(listCallback);
+        MonsterExecutor.getInstance().fetchPorts(monster, portsListCallback);*/
     }
 
     private void createShortcut(String shortcutName) {

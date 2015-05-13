@@ -1,5 +1,6 @@
 package com.tomclaw.minimonster.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,8 +8,8 @@ import java.util.List;
  */
 public class Model {
 
-    private List<Monster> monsters;
-    private int active;
+    private List<Monster> monsters = new ArrayList<>();
+    private int active = 0;
 
     public Model() {
     }
@@ -31,5 +32,9 @@ public class Model {
 
     public boolean isEmpty() {
         return monsters == null || monsters.isEmpty();
+    }
+
+    public Monster getActiveMonster() {
+        return getMonsters().get(getActive());
     }
 }

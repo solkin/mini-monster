@@ -1,8 +1,5 @@
 package com.tomclaw.minimonster;
 
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -10,13 +7,23 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+import com.marvinlabs.widget.floatinglabel.edittext.FloatingLabelEditText;
+import com.tomclaw.minimonster.dto.Monster;
+import com.tomclaw.minimonster.dto.PortsList;
+import com.tomclaw.minimonster.tasks.PleaseWaitTask;
+import com.tomclaw.minimonster.tasks.TaskExecutor;
+
+import java.lang.ref.WeakReference;
 
 /**
+ * Adding new monster activity.
  * Created by solkin on 13.05.15.
  */
 public class AddMonsterActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
+    private FloatingLabelEditText nameView;
+    private FloatingLabelEditText urlView;
+    private FloatingLabelEditText passwordView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,12 +31,18 @@ public class AddMonsterActivity extends AppCompatActivity {
 
         setContentView(R.layout.add_monster_activity);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle(R.string.add_monster);
+        if(actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle(R.string.add_monster);
+        }
+
+        nameView = (FloatingLabelEditText) findViewById(R.id.module_name);
+        urlView = (FloatingLabelEditText) findViewById(R.id.module_url);
+        passwordView = (FloatingLabelEditText) findViewById(R.id.module_password);
     }
 
     @Override
@@ -46,11 +59,52 @@ public class AddMonsterActivity extends AppCompatActivity {
                 return true;
             }
             case R.id.complete: {
-                // MonstersController.getInstance().insertMonster()
+                String name = nameView.getInputWidget().getText().toString();
+                String url = urlView.getInputWidget().getText().toString();
+                String password = passwordView.getInputWidget().getText().toString();
+                final Monster monster = new Monster(name, url, password);
+                TaskExecutor.getInstance().execute(new AddMonsterTask(this, monster));
                 return true;
             }
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private static class AddMonsterTask extends PleaseWaitTask {
+
+        private final Monster monster;
+        private WeakReference<AddMonsterActivity> weakActivity;
+
+        public AddMonsterTask(AddMonsterActivity activity, Monster monster) {
+            super(activity);
+            this.weakActivity = new WeakReference<>(activity);
+            this.monster = monster;
+        }
+
+        @Override
+        public void executeBackground() throws Throwable {
+            PortsList portsList = MonsterExecutor.fetchPorts(monster);
+            monster.setPortsList(portsList);
+            MonstersController.getInstance().insertMonster(monster, true);
+            MonstersController.getInstance().update();
+        }
+
+        @Override
+        public void onSuccessMain() {
+            AddMonsterActivity activity = weakActivity.get();
+            if(activity != null) {
+                activity.setResult(RESULT_OK);
+                activity.finish();
+            }
+        }
+
+        @Override
+        public void onFailMain() {
+            AddMonsterActivity activity = weakActivity.get();
+            if(activity != null) {
+                Toast.makeText(activity, R.string.unable_to_connect_to_monster, Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

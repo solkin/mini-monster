@@ -12,6 +12,11 @@ public class Port {
     public Port() {
     }
 
+    public Port(int index, boolean value) {
+        this.index = index;
+        this.value = value;
+    }
+
     public Port(String name, int index, boolean value) {
         this.name = name;
         this.index = index;
@@ -34,7 +39,7 @@ public class Port {
         this.index = index;
     }
 
-    public boolean isValue() {
+    public boolean getValue() {
         return value;
     }
 

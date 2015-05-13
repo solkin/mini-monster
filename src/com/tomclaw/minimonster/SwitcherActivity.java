@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.Toast;
 import com.tomclaw.minimonster.legacy.Switcher;
-import com.tomclaw.minimonster.legacy.SwitchersList;
 
 /**
  * Created with IntelliJ IDEA.
@@ -28,10 +27,10 @@ public class SwitcherActivity extends Activity {
         if(position == Settings.POSITION_INVALID) {
             showError();
         } else {
-            final ProgressDialog dialog = ProgressDialog.show(this,
+            /*final ProgressDialog dialog = ProgressDialog.show(this,
                     getString(com.tomclaw.minimonster.R.string.loading),
                     getString(com.tomclaw.minimonster.R.string.please_wait), true);
-            MonsterExecutor.ListCallback listCallback = new MonsterExecutor.ListCallback() {
+            MonsterExecutor.PortsListCallback portsListCallback = new MonsterExecutor.PortsListCallback() {
                 @Override
                 public void onComplete(final SwitchersList switchersList) {
                     runOnUiThread(new Runnable() {
@@ -64,7 +63,7 @@ public class SwitcherActivity extends Activity {
                     });
                 }
             };
-            MonsterExecutor.getInstance().fetchSwitchers(listCallback);
+            MonsterExecutor.getInstance().fetchPorts(monster, portsListCallback);*/
         }
     }
 
@@ -110,7 +109,7 @@ public class SwitcherActivity extends Activity {
         final ProgressDialog dialog = ProgressDialog.show(this,
                 getString(com.tomclaw.minimonster.R.string.loading),
                 getString(com.tomclaw.minimonster.R.string.please_wait), true);
-        MonsterExecutor.SwitchCallback callback = new MonsterExecutor.SwitchCallback() {
+        /*MonsterExecutor.PortCallback callback = new MonsterExecutor.PortCallback() {
             @Override
             public void onComplete(final SwitchersList switchersList) {
                 runOnUiThread(new Runnable() {
@@ -138,6 +137,6 @@ public class SwitcherActivity extends Activity {
                 });
             }
         };
-        MonsterExecutor.getInstance().switchPort(port, value, callback);
+        MonsterExecutor.getInstance().switchPort(port, value, callback);*/
     }
 }

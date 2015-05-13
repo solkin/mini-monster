@@ -35,4 +35,9 @@
     <string name="switcher_in_state">Now "%1$s" is %2$s. Switch now?</string>
     <string name="no_more_switcher">Switch with that name no longer exists!</string>
     <string name="title_already_exist">This name is already assigned to another switch!</string>
+    <string name="switchers">Switchers</string>
+    <string name="monsters">Modules</string>
+    <string name="add_monster">Add module</string>
+    <string name="complete">Complete</string>
+    <string name="monster_name">Module name (optional)</string>
 </resources>

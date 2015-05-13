@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            style="@style/Toolbar.Theme"
+            android:minHeight="?attr/actionBarSize"/>
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@drawable/toolbar_shadow" />
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="12dp">
+            <com.marvinlabs.widget.floatinglabel.edittext.FloatingLabelEditText
+                    android:id="@+id/edit_text1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    app:flw_labelText="Simple text input"
+                    app:flw_labelTextSize="16sp"
+                    app:flw_floatOnFocus="false"/>
+            <com.marvinlabs.widget.floatinglabel.edittext.FloatingLabelEditText
+                    android:id="@+id/edit_text2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    app:flw_labelText="Simple text input"
+                    app:flw_labelTextSize="16sp"
+                    app:flw_floatOnFocus="false"/>
+            <com.marvinlabs.widget.floatinglabel.edittext.FloatingLabelEditText
+                    android:id="@+id/edit_text3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:drawablePadding="10dp"
+                    android:inputType="textPassword"
+                    app:flw_labelText="Password input"
+                    app:flw_labelTextSize="16sp"
+                    app:flw_floatOnFocus="false"/>
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>

@@ -1,6 +1,8 @@
 package com.tomclaw.minimonster;
 
 import android.util.Log;
+import com.tomclaw.minimonster.legacy.Switcher;
+import com.tomclaw.minimonster.legacy.SwitchersList;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;

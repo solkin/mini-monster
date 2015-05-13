@@ -28,7 +28,6 @@ public class SettingsActivity extends PreferenceActivity {
 
         ActionBar bar = getActionBar();
         bar.setDisplayShowTitleEnabled(true);
-        bar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         bar.setDisplayHomeAsUpEnabled(true);
 
         getFragmentManager().beginTransaction().replace(android.R.id.content,

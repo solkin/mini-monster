@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/libs/appcompat/appcompat.iml" filepath="$PROJECT_DIR$/libs/appcompat/appcompat.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libs/floatinglabel-widgets/floatinglabel-widgets.iml" filepath="$PROJECT_DIR$/libs/floatinglabel-widgets/floatinglabel-widgets.iml" />
       <module fileurl="file://$PROJECT_DIR$/mini-monster.iml" filepath="$PROJECT_DIR$/mini-monster.iml" />
     </modules>
   </component>
 </project>
-

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Same as the default input widget text size -->
+    <dimen name="flw_defaultLabelTextSize">14sp</dimen>
+    <dimen name="flw_defaultInputWidgetTextSize">14sp</dimen>
+
+    <dimen name="flw_defaultDropDownItemTextSize">14sp</dimen>
+    <dimen name="flw_defaultDropDownItemPadding">16dp</dimen>
+
+</resources>

@@ -6,6 +6,8 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.Toast;
+import com.tomclaw.minimonster.legacy.Switcher;
+import com.tomclaw.minimonster.legacy.SwitchersList;
 
 /**
  * Created with IntelliJ IDEA.

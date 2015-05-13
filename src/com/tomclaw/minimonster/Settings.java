@@ -22,6 +22,9 @@ public class Settings {
     private static final String SWITCHER_PREFIX = "switcher_";
     public static final int POSITION_INVALID = -1;
 
+    public static String storeName = "mini-monster-storage";
+    public static int cacheSizeInKb = 1024;
+
     private static SharedPreferences mPreferences;
     private static Context mContext;
 

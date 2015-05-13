@@ -37,4 +37,7 @@
     <string name="title_already_exist">Такое название уже присвоено другому переключателю!</string>
     <string name="switchers">Переключатели</string>
     <string name="monsters">Модули</string>
+    <string name="add_monster">Добавление модуля</string>
+    <string name="complete">Готово</string>
+    <string name="monster_name">Имя модуля (опционально)</string>
 </resources>

@@ -1,21 +1,30 @@
 package com.tomclaw.minimonster;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SwitchCompat;
+import android.support.v7.widget.Toolbar;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
+import com.tomclaw.minimonster.dto.Model;
+import com.tomclaw.minimonster.legacy.SwitchersList;
+import com.tomclaw.minimonster.views.MonstersDrawerLayout;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
     private SwitchersAdapter mSwitchersAdapter;
     private ActionMode mActionMode;
+    private MonstersDrawerLayout drawerLayout;
+    private Toolbar toolbar;
 
     /**
      * Called when the activity is first created.
@@ -26,15 +35,27 @@ public class MainActivity extends Activity {
 
         setContentView(R.layout.main);
 
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle(R.string.app_name);
+
+        drawerLayout = (MonstersDrawerLayout) findViewById(R.id.drawer_layout);
+        drawerLayout.init(this, toolbar);
+        drawerLayout.setTitle(getString(R.string.app_name));
+        drawerLayout.setDrawerTitle(getString(R.string.app_name));
+
         Settings.getInstance().initSettings(this);
 
-        if(!Settings.getInstance().isSettingsInitialized()) {
+        /*if(!Settings.getInstance().isSettingsInitialized()) {
             overridePendingTransition(0, 0);
             startActivity(new Intent(this, SettingsActivity.class)
                     .putExtra(SettingsActivity.INIT_SETTINGS, true));
             finish();
             return;
-        }
+        }*/
 
         mSwitchersAdapter = new SwitchersAdapter(this);
 
@@ -111,7 +132,31 @@ public class MainActivity extends Activity {
             }
         });
 
-        refreshSwitchersList();
+        // refreshSwitchersList();
+        loadData();
+    }
+
+    private void loadData() {
+        MonstersController.getInstance().getModel(new MonstersController.GetModelCallback() {
+            @Override
+            public void onModel(final Model model) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(model.isEmpty()) {
+                            Intent intent = new Intent(MainActivity.this, AddMonsterActivity.class);
+                            startActivity(intent);
+                        }
+                        // mSwitchersAdapter.setSwitchersList(switchersList);
+                        // mSwitchersAdapter.notifyDataSetChanged();
+                    }
+                });
+            }
+        });
+    }
+
+    private void initUi() {
+
     }
 
     @Override
@@ -173,8 +218,27 @@ public class MainActivity extends Activity {
         return true;
     }
 
+    @Override
+    public void setTitle(CharSequence title) {
+        drawerLayout.setTitle(title.toString());
+        toolbar.setTitle(title);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        drawerLayout.syncToggleState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        drawerLayout.onToggleConfigurationChanged(newConfig);
+    }
+
     public void onToggleClicked(View view) {
-        ToggleButton switcherToggle = (ToggleButton) view;
+        SwitchCompat switcherToggle = (SwitchCompat) view;
         Integer port = (Integer) view.getTag(R.string.switcher_port);
         final ProgressDialog dialog = ProgressDialog.show(this,
                 getString(R.string.loading), getString(R.string.please_wait), true);
@@ -221,6 +285,7 @@ public class MainActivity extends Activity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        // localStore.set("switchers", switchersList);
                         mSwitchersAdapter.setSwitchersList(switchersList);
                         mSwitchersAdapter.notifyDataSetChanged();
                         if(dialog.isShowing()) {

@@ -2,13 +2,15 @@ package com.tomclaw.minimonster;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import android.widget.ToggleButton;
+import com.tomclaw.minimonster.legacy.Switcher;
+import com.tomclaw.minimonster.legacy.SwitchersList;
 
 /**
  * Created with IntelliJ IDEA.
@@ -73,7 +75,7 @@ public class SwitchersAdapter extends BaseAdapter {
         if(switcher != null) {
             TextView switcherTitle = (TextView) view.findViewById(R.id.switcher_title);
             TextView switcherPort = (TextView) view.findViewById(R.id.switcher_port);
-            ToggleButton switcherToggle = (ToggleButton) view.findViewById(R.id.switcher_toggle);
+            SwitchCompat switcherToggle = (SwitchCompat) view.findViewById(R.id.switcher_toggle);
 
             switcherTitle.setText(Settings.getInstance().getSwitcherTitle(position));
             switcherPort.setText(mContext.getString(R.string.switcher_port, switcher.getSwitcherPort()));

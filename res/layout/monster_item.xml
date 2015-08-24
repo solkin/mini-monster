@@ -5,12 +5,12 @@
               android:orientation="horizontal"
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
-    <ImageView
+    <com.tomclaw.minimonster.views.MonsterImageView
             android:id="@+id/monster_icon"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:padding="8dp"
-            android:src="@drawable/monster_icon"/>
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_margin="8dp"
+            android:scaleType="center"/>
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

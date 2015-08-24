@@ -2,20 +2,17 @@ package com.tomclaw.minimonster;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 import com.tomclaw.minimonster.dto.Monster;
+import com.tomclaw.minimonster.views.MonsterImageView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Created with IntelliJ IDEA.
@@ -74,12 +71,10 @@ public class MonstersAdapter extends BaseAdapter {
     private void bindView(View view, int position) {
         Monster monster = getItem(position);
         if(monster != null) {
-            ImageView monsterIcon = (ImageView) view.findViewById(R.id.monster_icon);
+            MonsterImageView monsterIcon = (MonsterImageView) view.findViewById(R.id.monster_icon);
             TextView monsterName = (TextView) view.findViewById(R.id.monster_name);
 
-            Random rnd = new Random(monster.getAccessibleUrl().hashCode());
-            int color = Color.argb(255, rnd.nextInt(128) + 64, rnd.nextInt(128) + 64, rnd.nextInt(128) + 64);
-            monsterIcon.setColorFilter(color, PorterDuff.Mode.MULTIPLY);
+            monsterIcon.setMonster(monster);
             monsterName.setText(monster.getName());
         }
     }

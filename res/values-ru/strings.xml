@@ -35,4 +35,5 @@
     <string name="switcher_in_state">Сейчас %1$s %2$s. Переключить?</string>
     <string name="no_more_switcher">Переключателя с таким названием больше не существует!</string>
     <string name="title_already_exist">Такое название уже присвоено другому переключателю!</string>
+    <string name="shortcut_created">Ярлык на этот порт помещён на рабочий стол</string>
 </resources>

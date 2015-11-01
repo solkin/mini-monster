@@ -7,8 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.ToggleButton;
+import android.support.v7.widget.SwitchCompat;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,6 +23,8 @@ public class SwitchersAdapter extends BaseAdapter {
     private final Context mContext;
     private LayoutInflater mInflater;
     private SwitchersList mSwitchersList;
+
+    private PortSwitchListener portSwitchListener;
 
     public SwitchersAdapter(Activity context) {
         this.mContext = context;
@@ -69,16 +73,26 @@ public class SwitchersAdapter extends BaseAdapter {
     }
 
     private void bindView(View view, int position) {
-        Switcher switcher = getItem(position);
+        final Switcher switcher = getItem(position);
         if(switcher != null) {
             TextView switcherTitle = (TextView) view.findViewById(R.id.switcher_title);
             TextView switcherPort = (TextView) view.findViewById(R.id.switcher_port);
-            ToggleButton switcherToggle = (ToggleButton) view.findViewById(R.id.switcher_toggle);
+            final SwitchCompat switcherToggle = (SwitchCompat) view.findViewById(R.id.switcher_toggle);
+            ImageView switcherIcon = (ImageView) view.findViewById(R.id.switcher_icon);
 
             switcherTitle.setText(Settings.getInstance().getSwitcherTitle(position));
             switcherPort.setText(mContext.getString(R.string.switcher_port, switcher.getSwitcherPort()));
             switcherToggle.setChecked(switcher.isSwitcherValue());
+            switcherIcon.setImageResource(switcher.isSwitcherValue() ? R.drawable.ic_socket_plugged : R.drawable.ic_socket_free);
             switcherToggle.setTag(R.string.switcher_port, switcher.getSwitcherPort());
+            switcherToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (portSwitchListener != null) {
+                        portSwitchListener.onPortSwitched(switcher.getSwitcherPort(), switcherToggle.isChecked());
+                    }
+                }
+            });
         }
     }
 
@@ -94,5 +108,13 @@ public class SwitchersAdapter extends BaseAdapter {
             }
         }
         return false;
+    }
+
+    public void setPortSwitchListener(PortSwitchListener portSwitchListener) {
+        this.portSwitchListener = portSwitchListener;
+    }
+
+    public static interface PortSwitchListener {
+        public void onPortSwitched(int port, boolean isChecked);
     }
 }

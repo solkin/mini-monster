@@ -1,13 +1,16 @@
 package com.tomclaw.minimonster;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
-import android.preference.PreferenceFragment;
+import android.preference.Preference;
+import android.preference.PreferenceScreen;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import com.github.machinarius.preferencefragment.PreferenceFragment;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,7 +18,7 @@ import android.view.MenuItem;
  * Date: 9/26/13
  * Time: 7:55 PM
  */
-public class SettingsActivity extends PreferenceActivity {
+public class SettingsActivity extends AppCompatActivity {
 
     public static final String INIT_SETTINGS = "init_settings";
     private boolean isInitSettings;
@@ -24,15 +27,15 @@ public class SettingsActivity extends PreferenceActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setContentView(R.layout.settings);
+
         isInitSettings = getIntent().getBooleanExtra(INIT_SETTINGS, false);
 
-        ActionBar bar = getActionBar();
-        bar.setDisplayShowTitleEnabled(true);
-        bar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        bar.setDisplayHomeAsUpEnabled(true);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        getFragmentManager().beginTransaction().replace(android.R.id.content,
-                new SettingsFragment()).commit();
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -71,9 +74,15 @@ public class SettingsActivity extends PreferenceActivity {
 
     public static class SettingsFragment extends PreferenceFragment {
         @Override
-        public void onCreate(final Bundle savedInstanceState) {
+        public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+            // Load the preferences from an XML resource.
             addPreferencesFromResource(R.xml.settings);
+        }
+
+        @Override
+        public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+            return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
     }
 }

@@ -1,19 +1,24 @@
 package com.tomclaw.minimonster;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity implements SwitchersAdapter.PortSwitchListener {
 
+    private android.support.v7.widget.Toolbar toolbar;
+    private FloatingActionButton fab;
     private SwitchersAdapter mSwitchersAdapter;
     private ActionMode mActionMode;
 
@@ -26,6 +31,16 @@ public class MainActivity extends Activity {
 
         setContentView(R.layout.main);
 
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                refreshSwitchersList();
+            }
+        });
+
         Settings.getInstance().initSettings(this);
 
         if(!Settings.getInstance().isSettingsInitialized()) {
@@ -37,6 +52,7 @@ public class MainActivity extends Activity {
         }
 
         mSwitchersAdapter = new SwitchersAdapter(this);
+        mSwitchersAdapter.setPortSwitchListener(this);
 
         final ListView switchersListView = (ListView) findViewById(R.id.switchers_list_view);
         switchersListView.setAdapter(mSwitchersAdapter);
@@ -111,16 +127,18 @@ public class MainActivity extends Activity {
             }
         });
 
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            FrameLayout.LayoutParams p = (FrameLayout.LayoutParams) fab.getLayoutParams();
+            p.setMargins(0, 0, 0, 0); // get rid of margins since shadow area is now the margin
+            fab.setLayoutParams(p);
+        }
+
         refreshSwitchersList();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_refresh: {
-                refreshSwitchersList();
-                return true;
-            }
             case R.id.action_info: {
                 final ProgressDialog dialog = ProgressDialog.show(this,
                         getString(R.string.loading), getString(R.string.please_wait), true);
@@ -173,9 +191,8 @@ public class MainActivity extends Activity {
         return true;
     }
 
-    public void onToggleClicked(View view) {
-        ToggleButton switcherToggle = (ToggleButton) view;
-        Integer port = (Integer) view.getTag(R.string.switcher_port);
+    @Override
+    public void onPortSwitched(int port, boolean isChecked) {
         final ProgressDialog dialog = ProgressDialog.show(this,
                 getString(R.string.loading), getString(R.string.please_wait), true);
         MonsterExecutor.SwitchCallback callback = new MonsterExecutor.SwitchCallback() {
@@ -208,7 +225,7 @@ public class MainActivity extends Activity {
                 });
             }
         };
-        MonsterExecutor.getInstance().switchPort(port, switcherToggle.isChecked(), callback);
+        MonsterExecutor.getInstance().switchPort(port, isChecked, callback);
     }
 
     private void refreshSwitchersList() {
@@ -263,5 +280,7 @@ public class MainActivity extends Activity {
 
         addIntent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
         getApplicationContext().sendBroadcast(addIntent);
+
+        Toast.makeText(this, R.string.shortcut_created, Toast.LENGTH_SHORT).show();
     }
 }

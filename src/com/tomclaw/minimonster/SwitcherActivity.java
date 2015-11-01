@@ -1,10 +1,10 @@
 package com.tomclaw.minimonster;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 /**
@@ -13,7 +13,7 @@ import android.widget.Toast;
  * Date: 9/27/13
  * Time: 12:52 PM
  */
-public class SwitcherActivity extends Activity {
+public class SwitcherActivity extends AppCompatActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

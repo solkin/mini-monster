@@ -35,4 +35,5 @@
     <string name="switcher_in_state">Now "%1$s" is %2$s. Switch now?</string>
     <string name="no_more_switcher">Switch with that name no longer exists!</string>
     <string name="title_already_exist">This name is already assigned to another switch!</string>
+    <string name="shortcut_created">Shortcut created on the desktop</string>
 </resources>

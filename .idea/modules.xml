@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/libs/appcompat/appcompat.iml" filepath="$PROJECT_DIR$/libs/appcompat/appcompat.iml" />
-      <module fileurl="file://$PROJECT_DIR$/libs/floatinglabel-widgets/floatinglabel-widgets.iml" filepath="$PROJECT_DIR$/libs/floatinglabel-widgets/floatinglabel-widgets.iml" />
-      <module fileurl="file://$PROJECT_DIR$/libs/material-drawer/material-drawer.iml" filepath="$PROJECT_DIR$/libs/material-drawer/material-drawer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/floatinglabelwidgets/floatinglabelwidgets.iml" filepath="$PROJECT_DIR$/floatinglabelwidgets/floatinglabelwidgets.iml" />
       <module fileurl="file://$PROJECT_DIR$/mini-monster.iml" filepath="$PROJECT_DIR$/mini-monster.iml" />
     </modules>
   </component>

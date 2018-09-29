@@ -1,0 +1,132 @@
+ECLIPSE ANDROID PROJECT IMPORT SUMMARY
+======================================
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+* .gitignore
+* .idea/
+* .idea/workspace.xml
+* README.md
+* ant.properties
+* app/
+* app/build.gradle
+* app/src/
+* app/src/main/
+* app/src/main/AndroidManifest.xml
+* app/src/main/java/
+* app/src/main/java/com/
+* app/src/main/java/com/tomclaw/
+* app/src/main/java/com/tomclaw/minimonster/
+* app/src/main/java/com/tomclaw/minimonster/MainActivity.java
+* app/src/main/java/com/tomclaw/minimonster/MonsterExecutor.java
+* app/src/main/java/com/tomclaw/minimonster/Settings.java
+* app/src/main/java/com/tomclaw/minimonster/SettingsActivity.java
+* app/src/main/java/com/tomclaw/minimonster/Switcher.java
+* app/src/main/java/com/tomclaw/minimonster/SwitcherActivity.java
+* app/src/main/java/com/tomclaw/minimonster/SwitchersAdapter.java
+* app/src/main/java/com/tomclaw/minimonster/SwitchersList.java
+* app/src/main/res/
+* app/src/main/res/drawable-mdpi/
+* app/src/main/res/drawable-mdpi/ic_edit.png
+* app/src/main/res/drawable-mdpi/ic_help.png
+* app/src/main/res/drawable-mdpi/ic_launcher.png
+* app/src/main/res/drawable-mdpi/ic_refresh.png
+* app/src/main/res/drawable-mdpi/ic_settings.png
+* app/src/main/res/drawable-mdpi/ic_shortcut.png
+* app/src/main/res/drawable-mdpi/ic_socket_free.png
+* app/src/main/res/drawable-mdpi/ic_socket_plugged.png
+* app/src/main/res/drawable-mdpi/ic_temperature.png
+* app/src/main/res/drawable-xhdpi/
+* app/src/main/res/drawable-xhdpi/ic_edit.png
+* app/src/main/res/drawable-xhdpi/ic_help.png
+* app/src/main/res/drawable-xhdpi/ic_launcher.png
+* app/src/main/res/drawable-xhdpi/ic_refresh.png
+* app/src/main/res/drawable-xhdpi/ic_settings.png
+* app/src/main/res/drawable-xhdpi/ic_shortcut.png
+* app/src/main/res/drawable-xhdpi/ic_socket_free.png
+* app/src/main/res/drawable-xhdpi/ic_socket_plugged.png
+* app/src/main/res/drawable-xhdpi/ic_temperature.png
+* app/src/main/res/drawable/
+* app/src/main/res/drawable/socket_background.xml
+* app/src/main/res/drawable/toolbar_shadow.xml
+* app/src/main/res/layout/
+* app/src/main/res/layout/main.xml
+* app/src/main/res/layout/settings.xml
+* app/src/main/res/layout/switcher_edit_view.xml
+* app/src/main/res/layout/switcher_item.xml
+* app/src/main/res/layout/toolbar_shadow_view.xml
+* app/src/main/res/menu/
+* app/src/main/res/menu/action_menu.xml
+* app/src/main/res/menu/main_menu.xml
+* app/src/main/res/menu/settings_menu.xml
+* app/src/main/res/values-it/
+* app/src/main/res/values-it/strings.xml
+* app/src/main/res/values-ru/
+* app/src/main/res/values-ru/strings.xml
+* app/src/main/res/values/
+* app/src/main/res/values/dimens.xml
+* app/src/main/res/values/keys.xml
+* app/src/main/res/values/strings.xml
+* app/src/main/res/values/styles.xml
+* app/src/main/res/xml/
+* app/src/main/res/xml/settings.xml
+* build.gradle
+* build.xml
+* gradle/
+* gradle/wrapper/
+* gradle/wrapper/gradle-wrapper.jar
+* gradle/wrapper/gradle-wrapper.properties
+* gradlew
+* gradlew.bat
+* mini-monster.iml
+* mini-monster.keystore
+* proguard-project.txt
+* proguard_logs/
+* proguard_logs/dump.txt
+* proguard_logs/mapping.txt
+* proguard_logs/seeds.txt
+* proguard_logs/usage.txt
+* projectFilesBackup/
+* projectFilesBackup/.idea/
+* projectFilesBackup/.idea/misc.xml
+* projectFilesBackup/mini-monster.iml
+* screenshots/
+* screenshots/device-2013-09-28-005626.png
+* screenshots/device-2013-09-28-005639.png
+* screenshots/device-2013-09-28-005653.png
+* screenshots/device-2013-09-28-005705.png
+* screenshots/device-2013-09-28-005727.png
+* screenshots/device-2013-09-28-005807.png
+* screenshots/device-2013-09-28-005850.png
+* screenshots/device-2013-09-28-005914.png
+* screenshots/device-2013-09-28-010005.png
+* screenshots/device-2013-09-28-010034.png
+* settings.gradle
+
+Moved Files:
+------------
+Android Gradle projects use a different directory structure than ADT
+Eclipse projects. Here's how the projects were restructured:
+
+* AndroidManifest.xml => app/src/main/AndroidManifest.xml
+* res/ => app/src/main/res/
+* src/ => app/src/main/java/
+
+Next Steps:
+-----------
+You can now build the project. The Gradle project needs network
+connectivity to download dependencies.
+
+Bugs:
+-----
+If for some reason your project does not build, and you determine that
+it is due to a bug or limitation of the Eclipse to Gradle importer,
+please file a bug at http://b.android.com with category
+Component-Tools.
+
+(This import summary is for your information only, and can be deleted
+after import once you are satisfied with the results.)

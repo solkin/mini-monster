@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference
+            android:key="monster_url"
+            android:summary="@string/setup_monster_url"
+            android:title="@string/monster_url"
+            android:defaultValue="@string/default_host">
+    </EditTextPreference>
+    <EditTextPreference
+            android:key="monster_password"
+            android:summary="@string/setup_monster_password"
+            android:title="@string/monster_password"
+            android:defaultValue="@string/default_password">
+    </EditTextPreference>
+</PreferenceScreen>

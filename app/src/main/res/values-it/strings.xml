@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mini Monster</string>
+    <string name="action_refresh">Aggiorna</string>
+    <string name="action_settings">Settaggi</string>
+    <string name="action_info">Info</string>
+    <string name="action_help">Help</string>
+    <string name="switcher_title">Interruttore %d</string>
+    <string name="switcher_port">Porta: %d</string>
+    <string name="value_on">ON</string>
+    <string name="value_off">OFF</string>
+    <string name="switch_failed">Commutazione Fallita</string>
+    <string name="settings_name">Settaggi</string>
+    <string name="monster_url">URL</string>
+    <string name="monster_password">Password</string>
+    <string name="setup_monster_url">Setta URL e porta di Monster</string>
+    <string name="setup_monster_password">Setta password di Monster</string>
+    <string name="temperature_failed">Errore durante la lettura della temperatura</string>
+    <string name="temperature_title">Temperatura</string>
+    <string name="temerature">Temperatura: %s</string>
+    <string name="close">Esci</string>
+    <string name="list_failed">Errore durante il caricamento degli Switchers</string>
+    <string name="loading">Caricamento</string>
+    <string name="please_wait">Attendere, prego…</string>
+    <string name="content_edit">Rinomina</string>
+    <string name="cancel">Cancella</string>
+    <string name="ok">OK</string>
+    <string name="edit_switcher_title">Modifica il titolo</string>
+    <string name="rating_important">Collegamenta</string>
+    <string name="switch_state">Cambia stato</string>
+    <string name="turn_on">Accendi</string>
+    <string name="turn_off">Spegni</string>
+    <string name="turned_on">acceso</string>
+    <string name="turned_off">spento</string>
+    <string name="switcher_in_state">"%1$s" è %2$s. Commutare ora?</string>
+    <string name="no_more_switcher">L\'interruttore con questo nome non esiste più!</string>
+    <string name="title_already_exist">Questo nome è già stato usato per un\'altro interruttore!</string>
+    <string name="shortcut_created">Collegamento creato sul desktop</string>
+</resources>

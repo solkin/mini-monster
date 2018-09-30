@@ -13,7 +13,6 @@ import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.*;
 
 public class MainActivity extends AppCompatActivity implements SwitchersAdapter.PortSwitchListener {
 

@@ -1,6 +1,5 @@
 package com.tomclaw.minimonster;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +10,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 
 /**
@@ -27,7 +27,7 @@ public class SwitchersAdapter extends BaseAdapter {
 
     private PortSwitchListener portSwitchListener;
 
-    public SwitchersAdapter(Activity context) {
+    public SwitchersAdapter(AppCompatActivity context) {
         this.mContext = context;
         this.mInflater = context.getLayoutInflater();
         mSwitchersList = new SwitchersList();

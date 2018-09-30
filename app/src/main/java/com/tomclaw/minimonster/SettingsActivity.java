@@ -24,6 +24,8 @@ public class SettingsActivity extends AppCompatActivity {
     public static final String INIT_SETTINGS = "init_settings";
     private boolean isInitSettings;
 
+    private SettingsFragment settingsFragment;
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +39,11 @@ public class SettingsActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        settingsFragment = new SettingsFragment();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.content, settingsFragment)
+                .commit();
     }
 
     @Override
